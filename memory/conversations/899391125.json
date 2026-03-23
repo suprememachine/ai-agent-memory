@@ -77,7 +77,14 @@
         "content": "Bisa, tapi saya perlu detail databasenya dulu. Kirim salah satu dari ini:\n1. Jenis database (MySQL/PostgreSQL/MongoDB/dll)\n2. Host/port/nama database\n3. Tabel/koleksi yang mau dicek\n4. Kredensial atau endpoint API yang bisa diakses\n5. Jika maksudnya file lokal/dump, kirim isi atau strukturnya\n\nKalau mau, saya juga bisa bantu susun query untuk cek apakah ada data bernama 'opensea monitor'.",
         "timestamp": "2026-03-23T01:23:25.101Z"
       }
+    ],
+    "tg_1774229026752": [
+      {
+        "role": "user",
+        "content": "Reminder 1menit kedepan",
+        "timestamp": "2026-03-23T01:23:54.275Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T01:23:26.038Z"
+  "updatedAt": "2026-03-23T01:23:54.526Z"
 }
