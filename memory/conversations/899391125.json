@@ -1,17 +1,5 @@
 {
   "sessions": {
-    "tg_1774232615211": [
-      {
-        "role": "user",
-        "content": "mineloot_rewards",
-        "timestamp": "2026-03-23T02:23:39.735Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Skill yang tersedia untuk MineLoot saat ini adalah `mineloot_status`, bukan `mineloot_rewards`.\n\nKalau mau, kirim wallet address kamu dan saya bisa cek status MineLoot saat ini.",
-        "timestamp": "2026-03-23T02:23:39.735Z"
-      }
-    ],
     "tg_1774232636204": [
       {
         "role": "user",
@@ -179,7 +167,14 @@
         "content": "Bisa. Skill apa yang ingin ditambahkan, dan untuk fungsi apa?",
         "timestamp": "2026-03-23T10:54:02.367Z"
       }
+    ],
+    "tg_1774263283052": [
+      {
+        "role": "user",
+        "content": "Wallet",
+        "timestamp": "2026-03-23T10:54:46.385Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T10:54:03.281Z"
+  "updatedAt": "2026-03-23T10:54:46.580Z"
 }
