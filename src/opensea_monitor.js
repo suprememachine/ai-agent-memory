@@ -1,99 +1,48 @@
-// OpenSea Monitor v2 — dengan notif status online/offline & heartbeat
+// OpenSea Monitor v3 — silent mode, notif HANYA kalau ada mint/sale
 const axios = require("axios");
 
 const WALLET = "0x806eca4d9e4cebea43df3d0fbb4867aa59422c7a";
 const OPENSEA_URL = `https://api.opensea.io/api/v2/events/accounts/${WALLET}`;
-const POLL_INTERVAL_MS  = 60  * 1000;        // cek event setiap 60 detik
-const HEARTBEAT_INTERVAL_MS = 6 * 60 * 60 * 1000; // heartbeat setiap 6 jam
+const POLL_INTERVAL_MS = 60 * 1000; // cek setiap 60 detik
 const EVENT_TYPES = ["mint", "sale"];
 
 class OpenSeaMonitor {
   constructor(sendNotification) {
-    this.sendNotification   = sendNotification;
-    this.seenEventIds       = new Set();
-    this.isRunning          = false;
-    this.pollTimer          = null;
-    this.heartbeatTimer     = null;
-    this.apiKey             = process.env.OPENSEA_API_KEY || null;
-    this.startTime          = null;
-    this.pollCount          = 0;
-    this.lastPollOk         = null;
-    this.errorCount         = 0;
+    this.sendNotification = sendNotification;
+    this.seenEventIds     = new Set();
+    this.isRunning        = false;
+    this.pollTimer        = null;
+    this.apiKey           = process.env.OPENSEA_API_KEY || null;
+    this.pollCount        = 0;
+    this.errorCount       = 0;
+    this.lastPollOk       = null;
+    this.startTime        = null;
   }
 
-  async start() {
+  start() {
     if (this.isRunning) return;
-    this.isRunning  = true;
-    this.startTime  = new Date();
-
+    this.isRunning = true;
+    this.startTime = new Date();
+    // Hanya log ke console, TIDAK kirim Telegram
     console.log("👁 OpenSea monitor started for wallet:", WALLET);
-
-    // ── Notif: Monitor AKTIF ──────────────────────────────────────────
-    await this._notify(
-      `👁 *OpenSea Monitor AKTIF*\n\n` +
-      `✅ Bot berhasil start dan mulai memantau\n` +
-      `👛 Wallet: \`${WALLET.slice(0,8)}...${WALLET.slice(-6)}\`\n` +
-      `🔍 Memantau: Mint & Sale\n` +
-      `⏱ Cek setiap: 60 detik\n` +
-      `🕐 Mulai: ${this._timeNow()}\n\n` +
-      `_Kamu akan dapat notif otomatis saat ada aktivitas\\._`
-    );
-
-    // Poll pertama langsung
-    await this._poll();
-
-    // Interval polling
+    this._poll();
     this.pollTimer = setInterval(() => this._poll(), POLL_INTERVAL_MS);
-
-    // Heartbeat setiap 6 jam — bukti bot masih hidup
-    this.heartbeatTimer = setInterval(() => this._sendHeartbeat(), HEARTBEAT_INTERVAL_MS);
   }
 
-  async stop(reason = "manual") {
-    if (this.pollTimer)      clearInterval(this.pollTimer);
-    if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
+  stop() {
+    if (this.pollTimer) clearInterval(this.pollTimer);
     this.isRunning = false;
-
-    const uptime = this._uptime();
-    console.log("🛑 OpenSea monitor stopped:", reason);
-
-    // ── Notif: Monitor MATI ───────────────────────────────────────────
-    await this._notify(
-      `🛑 *OpenSea Monitor BERHENTI*\n\n` +
-      `❌ Alasan: ${escMd(reason)}\n` +
-      `⏱ Uptime: ${uptime}\n` +
-      `📊 Total cek: ${this.pollCount}x\n` +
-      `🕐 Waktu: ${this._timeNow()}\n\n` +
-      `_Bot akan restart otomatis jika Railway masih aktif\\._`
-    );
+    // Hanya log ke console, TIDAK kirim Telegram
+    console.log("🛑 OpenSea monitor stopped. Polls:", this.pollCount);
   }
 
-  // ── Heartbeat ───────────────────────────────────────────────────────
-  async _sendHeartbeat() {
-    const uptime = this._uptime();
-    const lastOk = this.lastPollOk
-      ? this.lastPollOk.toLocaleTimeString("id-ID", { timeZone: "Asia/Jakarta" })
-      : "belum ada";
-
-    await this._notify(
-      `💓 *OpenSea Monitor masih aktif*\n\n` +
-      `✅ Status: Online & memantau\n` +
-      `👛 Wallet: \`${WALLET.slice(0,8)}...${WALLET.slice(-6)}\`\n` +
-      `⏱ Uptime: ${uptime}\n` +
-      `📊 Total cek: ${this.pollCount}x\n` +
-      `🕐 Cek terakhir OK: ${lastOk}\n` +
-      `⚠️ Error terakhir: ${this.errorCount}x\n` +
-      `🕐 Waktu: ${this._timeNow()}`
-    );
-  }
-
-  // ── Poll event OpenSea ──────────────────────────────────────────────
   async _poll() {
     this.pollCount++;
     try {
       const events = await this._fetchEvents();
       if (!events || events.length === 0) {
         this.lastPollOk = new Date();
+        this.errorCount = 0;
         return;
       }
 
@@ -111,28 +60,24 @@ class OpenSeaMonitor {
       this.lastPollOk = new Date();
       this.errorCount = 0;
 
+      // Hanya kirim notif kalau ada event baru
       for (const event of newEvents) {
         const msg = this._formatEvent(event);
-        if (msg) await this._notify(msg);
+        if (msg) {
+          try {
+            await this.sendNotification(msg);
+          } catch (e) {
+            console.error("Notify failed:", e.message);
+          }
+        }
       }
     } catch (err) {
       this.errorCount++;
-      console.error("OpenSea poll error:", err.message);
-
-      // Kalau error 5x berturut-turut → kirim notif warning
-      if (this.errorCount === 5) {
-        await this._notify(
-          `⚠️ *OpenSea Monitor: Ada Masalah*\n\n` +
-          `❌ Gagal fetch data 5x berturut\\-turut\n` +
-          `🔴 Error: ${escMd(err.message)}\n` +
-          `🕐 Waktu: ${this._timeNow()}\n\n` +
-          `_Monitor tetap berjalan dan akan coba lagi\\._`
-        );
-      }
+      // Log error ke console saja, tidak spam Telegram
+      console.error(`OpenSea poll error #${this.errorCount}:`, err.message);
     }
   }
 
-  // ── Fetch dari OpenSea API ─────────────────────────────────────────
   async _fetchEvents() {
     const headers = {
       "accept": "application/json",
@@ -147,7 +92,6 @@ class OpenSeaMonitor {
       return res.data?.asset_events || [];
     } catch (err) {
       if (err.response?.status === 401 || err.response?.status === 403) {
-        console.warn("⚠️ OpenSea API key invalid — fallback SimpleHash");
         return await this._fetchFallback();
       }
       if (err.response?.status === 429) {
@@ -158,7 +102,6 @@ class OpenSeaMonitor {
     }
   }
 
-  // ── Fallback: SimpleHash (free) ────────────────────────────────────
   async _fetchFallback() {
     try {
       const res = await axios.get(
@@ -197,7 +140,6 @@ class OpenSeaMonitor {
     }
   }
 
-  // ── Format pesan notif ─────────────────────────────────────────────
   _formatEvent(event) {
     const type = event.event_type;
     if (!EVENT_TYPES.includes(type)) return null;
@@ -207,16 +149,20 @@ class OpenSeaMonitor {
     const col  = nft.collection?.name || nft.collection || "Unknown Collection";
     const link = nft.permalink || nft.opensea_url ||
       `https://opensea.io/${WALLET}/activity`;
-    const qty  = event.quantity > 1 ? ` \\(x${event.quantity}\\)` : "";
-    const time = this._timeNow();
+    const qty  = event.quantity > 1 ? ` (x${event.quantity})` : "";
+    const time = new Date().toLocaleString("id-ID", {
+      timeZone: "Asia/Jakarta",
+      day: "2-digit", month: "short",
+      hour: "2-digit", minute: "2-digit"
+    });
 
     if (type === "mint") {
       return (
-        `🌟 *MINT TERDETEKSI\\!*\n\n` +
+        `🌟 *MINT TERDETEKSI!*\n\n` +
         `🎨 NFT: *${escMd(name)}*${qty}\n` +
         `📦 Koleksi: ${escMd(col)}\n` +
         `👛 Wallet: \`${WALLET.slice(0,8)}...${WALLET.slice(-6)}\`\n` +
-        `🕐 Waktu: ${time}\n` +
+        `🕐 Waktu: ${escMd(time)}\n` +
         `🔗 [Lihat di OpenSea](${link})`
       );
     }
@@ -226,41 +172,17 @@ class OpenSeaMonitor {
         ? `${(Number(event.payment.quantity) / 1e18).toFixed(4)} ${event.payment.symbol || "ETH"}`
         : "N/A";
       return (
-        `💰 *SALE TERDETEKSI\\!*\n\n` +
+        `💰 *SALE TERDETEKSI!*\n\n` +
         `🎨 NFT: *${escMd(name)}*${qty}\n` +
         `📦 Koleksi: ${escMd(col)}\n` +
         `💵 Harga: ${escMd(price)}\n` +
         `👛 Wallet: \`${WALLET.slice(0,8)}...${WALLET.slice(-6)}\`\n` +
-        `🕐 Waktu: ${time}\n` +
+        `🕐 Waktu: ${escMd(time)}\n` +
         `🔗 [Lihat di OpenSea](${link})`
       );
     }
+
     return null;
-  }
-
-  // ── Helpers ────────────────────────────────────────────────────────
-  async _notify(msg) {
-    try {
-      await this.sendNotification(msg);
-    } catch (e) {
-      console.error("Notify failed:", e.message);
-    }
-  }
-
-  _timeNow() {
-    return new Date().toLocaleString("id-ID", {
-      timeZone: "Asia/Jakarta",
-      day: "2-digit", month: "short", year: "numeric",
-      hour: "2-digit", minute: "2-digit", second: "2-digit"
-    });
-  }
-
-  _uptime() {
-    if (!this.startTime) return "0 menit";
-    const ms = Date.now() - this.startTime.getTime();
-    const h  = Math.floor(ms / 3600000);
-    const m  = Math.floor((ms % 3600000) / 60000);
-    return h > 0 ? `${h} jam ${m} menit` : `${m} menit`;
   }
 }
 
