@@ -1,17 +1,5 @@
 {
   "sessions": {
-    "tg_1774234878433": [
-      {
-        "role": "user",
-        "content": "mineloot_status",
-        "timestamp": "2026-03-23T03:01:27.212Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Похоже, вы хотите проверить **статус MineLoot**.\n\nЕсли вам нужен конкретный статус сервера/сайта, уточните, пожалуйста:\n- **IP или домен сервера**\n- или **ссылку на сайт**\n- или что именно проверить: **онлайн ли сервер, сайт, лаунчер, донат-магазин и т.д.**\n\nМожете просто отправить, например:\n- `play.mineloot.ru`\n- `mineloot.ru`\n- `проверь сервер MineLoot`",
-        "timestamp": "2026-03-23T03:01:27.212Z"
-      }
-    ],
     "tg_1774237766884": [
       {
         "role": "user",
@@ -189,7 +177,14 @@
         "content": "Siap, setuju. Berarti fiturnya: pembuatan wallet, import wallet, dan extract/export wallet.\n\nLangkah berikutnya, kirim detail ini biar saya bantu susun lanjutannya:\n1. Jenis wallet: EVM / Solana / Bitcoin / multi-chain\n2. Format import: private key / seed phrase / JSON keystore\n3. Format extract/export: private key / mnemonic / keystore\n4. Tujuan: web app / bot / backend API\n5. Bahasa yang dipakai: JavaScript / Python\n\nKalau mau, saya bisa lanjut buatkan:\n- daftar fitur lengkap\n- alur kerja\n- struktur API\n- contoh kode dasarnya",
         "timestamp": "2026-03-23T10:56:59.337Z"
       }
+    ],
+    "tg_1774263481883": [
+      {
+        "role": "user",
+        "content": "1.Evm dan solana\n2.Private dan phrase\n3.Private dan phrase \n4.Bot\n5.Python",
+        "timestamp": "2026-03-23T10:58:08.381Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T10:57:00.501Z"
+  "updatedAt": "2026-03-23T10:58:08.746Z"
 }
