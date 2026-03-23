@@ -1,27 +1,5 @@
 {
   "sessions": {
-    "tg_1774231108275": [
-      {
-        "role": "user",
-        "content": "llm",
-        "timestamp": "2026-03-23T01:58:33.760Z"
-      },
-      {
-        "role": "assistant",
-        "content": "LLM adalah singkatan dari Large Language Model, yaitu model AI yang dilatih dengan sangat banyak teks untuk memahami dan menghasilkan bahasa manusia. Contohnya dipakai untuk chatbot, rangkum teks, terjemahan, menulis kode, dan menjawab pertanyaan. Kalau mau, saya bisa jelaskan versi sederhana, versi teknis, atau kasih contoh cara kerjanya.",
-        "timestamp": "2026-03-23T01:58:33.760Z"
-      },
-      {
-        "role": "user",
-        "content": "Cek rewards dan stats user MineLoot. Wallet address akan diberikan user.\n\n1. Fetch GET https://api.mineloot.app/api/user/{address}/rewards\n2. Fetch GET https://api.mineloot.app/api/user/{address}\n3. Fetch GET https://api.mineloot.app/api/staking/{address}\n\nTampilkan:\n- Pending ETH yang bisa di-claim\n- Pending LOOT (unforged, forged, net setelah fee 10%)\n- Total rounds played & wins\n- Staking balance & pending yield\n- Rekomendasi: apakah sebaiknya claim sekarang atau hold untuk forging bonus",
-        "timestamp": "2026-03-23T01:58:39.650Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Siap. Kirim wallet address kamu dulu, nanti saya cek:\n- Pending ETH yang bisa di-claim\n- Pending LOOT: unforged, forged, dan net setelah fee 10%\n- Total rounds played & wins\n- Staking balance & pending yield\n- Rekomendasi: claim sekarang atau hold untuk forging bonus",
-        "timestamp": "2026-03-23T01:58:39.650Z"
-      }
-    ],
     "tg_1774231154394": [
       {
         "role": "user",
@@ -134,7 +112,14 @@
         "content": "Похоже, вы хотите проверить **статус MineLoot**.\n\nЕсли вам нужен конкретный статус сервера/сайта, уточните, пожалуйста:\n- **IP или домен сервера**\n- или **ссылку на сайт**\n- или что именно проверить: **онлайн ли сервер, сайт, лаунчер, донат-магазин и т.д.**\n\nМожете просто отправить, например:\n- `play.mineloot.ru`\n- `mineloot.ru`\n- `проверь сервер MineLoot`",
         "timestamp": "2026-03-23T03:01:27.212Z"
       }
+    ],
+    "tg_1774237766884": [
+      {
+        "role": "user",
+        "content": "Skilld",
+        "timestamp": "2026-03-23T03:49:31.836Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T03:01:28.294Z"
+  "updatedAt": "2026-03-23T03:49:32.186Z"
 }
