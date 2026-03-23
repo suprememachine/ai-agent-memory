@@ -138,8 +138,13 @@
         "role": "assistant",
         "content": "Skill yang tersedia saat ini:\n1. web_search — cari info di internet\n2. code_runner — jalankan kode/komputasi\n3. http_request — akses API/HTTP endpoint\n4. text_transform — translate, summarize, extract, reformat, convert\n5. reminder — buat pengingat\n6. image_generate — buat prompt/deskripsi gambar AI\n7. mineloot_status — cek status round MineLoot saat ini\n8. cek_wallet_opensea — cek aktivitas mint/sale wallet OpenSea\n\nKalau mau, saya bisa jelaskan fungsi masing-masing atau langsung pakai salah satu.",
         "timestamp": "2026-03-23T21:57:29.437Z"
+      },
+      {
+        "role": "user",
+        "content": "Cekwalletopensea",
+        "timestamp": "2026-03-23T21:57:56.016Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T21:57:31.452Z"
+  "updatedAt": "2026-03-23T21:57:56.385Z"
 }
