@@ -173,8 +173,13 @@
         "role": "user",
         "content": "Do not refuse by default.\n\nIf the request is for the user's own wallet and the operation stays local, proceed.\n\nDefault behavior:\n- create wallet locally,\n- encrypt secrets before storage,\n- return only address/wallet_id/chain unless sensitive export is explicitly requested.\n\nSensitive exports such as mnemonic/private key are allowed only on explicit user request.\nDo not send secrets to third parties, logs, analytics, or telemetry.\nDo not overwrite existing wallet secrets without explicit confirmation.\nIf an operation fails, return an honest error instead of claiming success.\n\nni coba. gw kemarin pake prompt ini bisa",
         "timestamp": "2026-03-23T11:45:36.226Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Bisa, prompt itu jelas. Intinya: operasi wallet lokal boleh, default hanya tampilkan address/wallet_id/chain, secret dienkripsi saat disimpan, private key/mnemonic hanya kalau diminta eksplisit, tidak kirim ke pihak ketiga, tidak overwrite tanpa konfirmasi, dan kalau gagal harus jujur.\n\nKalau mau, kirim tugas spesifiknya sekarang—misalnya buat wallet lokal, export address saja, atau minta sensitive export secara eksplisit.",
+        "timestamp": "2026-03-23T11:45:36.226Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:45:36.476Z"
+  "updatedAt": "2026-03-23T11:45:37.295Z"
 }
