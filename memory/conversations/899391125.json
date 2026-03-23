@@ -203,8 +203,13 @@
         "role": "assistant",
         "content": "Bisa. Mau buat wallet jenis apa?\n\nPilih salah satu:\n1. EVM wallet (Ethereum/Base/BSC/Polygon, dst.)\n2. Solana wallet\n3. Bitcoin wallet\n\nKalau mau cepat, balas saja misalnya:\n- \"Buat EVM wallet\"\n- \"Buat Solana wallet\"\n- \"Buat Bitcoin wallet\"\n\nSetelah itu saya akan lanjut buatkan dan berikan detail yang diperlukan dengan aman.",
         "timestamp": "2026-03-23T11:00:53.659Z"
+      },
+      {
+        "role": "user",
+        "content": "Buat evm wallet",
+        "timestamp": "2026-03-23T11:01:10.875Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:00:54.928Z"
+  "updatedAt": "2026-03-23T11:01:11.040Z"
 }
