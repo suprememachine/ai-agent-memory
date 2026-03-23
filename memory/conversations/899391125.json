@@ -133,8 +133,13 @@
         "role": "assistant",
         "content": "Siap 👍  \nAku bisa pakai **emoji** dan bikin format **heatmap** juga.\n\nContoh heatmap sederhana:\n\n**Mood Heatmap Mingguan**\n🟩 Sangat baik  \n🟨 Oke  \n🟧 Capek  \n🟥 Berat\n\nSenin 🟩  \nSelasa 🟨  \nRabu 🟧  \nKamis 🟩  \nJumat 🟥  \nSabtu 🟨  \nMinggu 🟩\n\nAtau versi emoji padat:\n`🟩🟨🟧🟩🟥🟨🟩`\n\nKalau kamu mau, aku bisa bantu buat:\n- **heatmap aktivitas**\n- **heatmap mood**\n- **heatmap produktivitas**\n- **heatmap absensi**\n- **heatmap kebiasaan harian**\n\nKirim aja datanya, nanti aku formatin rapi pakai emoji 🔥📊",
         "timestamp": "2026-03-23T03:52:13.155Z"
+      },
+      {
+        "role": "user",
+        "content": "Ya",
+        "timestamp": "2026-03-23T03:52:29.816Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T03:52:14.257Z"
+  "updatedAt": "2026-03-23T03:52:29.931Z"
 }
