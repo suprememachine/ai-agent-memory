@@ -1,9 +1,10 @@
 require("dotenv").config();
 const express = require("express");
-const { createBot } = require("./telegramBot");
-const { AIAgent } = require("./agent");
-const { GitHubMemory } = require("./memory");
+const { createBot }      = require("./telegramBot");
+const { AIAgent }        = require("./agent");
+const { GitHubMemory }   = require("./memory");
 const { OpenSeaMonitor } = require("./opensea_monitor");
+const { MineLootMiner }  = require("./mineloot_miner");
 
 // Validasi provider-aware
 const provider = (process.env.LLM_PROVIDER || "qwen").toLowerCase();
@@ -21,7 +22,7 @@ const required = [
   "GITHUB_TOKEN",
   "GITHUB_OWNER",
   "GITHUB_REPO",
-  "TELEGRAM_OWNER_ID",  // wajib untuk monitor — tahu siapa yang dapat notif
+  "TELEGRAM_OWNER_ID",
 ];
 
 const missing = required.filter(k => !process.env[k]);
@@ -35,51 +36,56 @@ async function main() {
   console.log(`📡 Provider: ${provider} | Model: ${process.env.MODEL_NAME || "auto"}`);
   console.log(`💾 Memory: GitHub (${process.env.GITHUB_OWNER}/${process.env.GITHUB_REPO})`);
 
-  // Setup GitHub structure
   const memory = new GitHubMemory();
   await memory.ensureRepoSetup();
 
-  // Init agent
   const agent = new AIAgent();
-
-  // Start Telegram bot
-  const bot = await createBot(agent);
+  const bot   = await createBot(agent);
   bot.start();
   console.log("🤖 Telegram bot started (long polling)");
 
-  // ── OpenSea Monitor ────────────────────────────────────────────────────
   const OWNER_CHAT_ID = process.env.TELEGRAM_OWNER_ID;
-  const monitor = new OpenSeaMonitor(async (message) => {
-    try {
-      await bot.api.sendMessage(OWNER_CHAT_ID, message, { parse_mode: "Markdown" });
-    } catch (e) {
-      console.error("Failed to send monitor notif:", e.message);
-    }
-  });
-  monitor.start();
-  console.log("👁 OpenSea monitor active");
 
-  // Express health check
+  const sendMsg = async (msg) => {
+    try {
+      await bot.api.sendMessage(OWNER_CHAT_ID, msg, { parse_mode: "Markdown" });
+    } catch (e) {
+      console.error("Send msg failed:", e.message);
+    }
+  };
+
+  // ── OpenSea Monitor (silent — notif hanya kalau ada mint/sale) ─────────
+  const opensea = new OpenSeaMonitor(sendMsg);
+  opensea.start();
+
+  // ── MineLoot Miner (aktif hanya kalau MINING_ENABLED=true) ────────────
+  const miner = new MineLootMiner(sendMsg);
+  await miner.start();
+
+  // ── Express health check ───────────────────────────────────────────────
   const app = express();
   app.get("/", (_, res) => res.json({
     status: "ok",
-    service: "telegram-ai-agent",
     provider,
-    opensea_monitor: monitor.isRunning,
+    opensea_monitor: opensea.isRunning,
+    mineloot_miner: miner.isRunning,
+    miner_wallet: miner.walletAddress,
     uptime: process.uptime()
   }));
   app.get("/health", (_, res) => res.json({
     status: "ok",
     provider,
     model: process.env.MODEL_NAME || "auto",
-    opensea_monitor: monitor.isRunning,
+    opensea_monitor: opensea.isRunning,
+    mineloot_miner: miner.isRunning,
   }));
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => console.log(`✅ Health check server on port ${PORT}`));
 
   process.on("SIGTERM", async () => {
     console.log("Shutting down...");
-    monitor.stop();
+    opensea.stop();
+    miner.stop();
     await bot.stop();
     process.exit(0);
   });
