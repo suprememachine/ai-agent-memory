@@ -30,7 +30,7 @@ function splitMessage(text, maxLen = 4000) {
   return chunks;
 }
 
-async function createBot(agent) {
+async function createBot(agent, monitor = null) {
   const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN);
 
   const guard = (ctx) => {
@@ -40,6 +40,56 @@ async function createBot(agent) {
     }
     return true;
   };
+
+
+  // ── /addwallet ────────────────────────────────────────────────────────
+  bot.command("addwallet", async (ctx) => {
+    if (!guard(ctx)) return;
+    if (!monitor) return ctx.reply("❌ Monitor tidak aktif.");
+    const args  = (ctx.match || "").trim().split(/\s+/);
+    const addr  = args[0] || "";
+    const label = args.slice(1).join(" ") || null;
+    if (!addr.startsWith("0x") || addr.length !== 42) {
+      return ctx.reply("❌ Format salah. Contoh:\n/addwallet 0x123...abc NamaOrang");
+    }
+    const added = monitor.addWallet(addr, label);
+    if (added) {
+      await ctx.reply(
+        `✅ Wallet ditambahkan!\n\n👛 ${addr}\n🏷 Label: ${label || "tidak ada"}\n\nNotif mint/sale akan dikirim otomatis.`
+      );
+    } else {
+      await ctx.reply(`⚠️ Wallet ${addr} sudah ada di monitor.`);
+    }
+  });
+
+  // ── /removewallet ─────────────────────────────────────────────────────
+  bot.command("removewallet", async (ctx) => {
+    if (!guard(ctx)) return;
+    if (!monitor) return ctx.reply("❌ Monitor tidak aktif.");
+    const addr = (ctx.match || "").trim();
+    if (!addr) return ctx.reply("Usage: /removewallet 0x...");
+    const removed = monitor.removeWallet(addr);
+    await ctx.reply(removed
+      ? `✅ Wallet ${addr} dihapus dari monitor.`
+      : `❌ Wallet tidak ditemukan di monitor.`
+    );
+  });
+
+  // ── /listwallet ───────────────────────────────────────────────────────
+  bot.command("listwallet", async (ctx) => {
+    if (!guard(ctx)) return;
+    if (!monitor) return ctx.reply("❌ Monitor tidak aktif.");
+    const wallets = monitor.listWallets();
+    if (wallets.length === 0) return ctx.reply("Tidak ada wallet yang dipantau.");
+    let msg = "👁 Wallet yang Dipantau:\n\n";
+    wallets.forEach((w, i) => {
+      const label = w.label ? ` — ${w.label}` : "";
+      msg += `${i+1}. ${w.address}${label}\n`;
+    });
+    msg += `\nTotal: ${wallets.length} wallet`;
+    msg += "\n\nKetik /addwallet 0x... NamaLabel untuk tambah";
+    await ctx.reply(msg);
+  });
 
   bot.command("start", async (ctx) => {
     if (!guard(ctx)) return;

@@ -1,90 +1,140 @@
-// OpenSea Monitor v3 — silent mode, notif HANYA kalau ada mint/sale
+// OpenSea Monitor — multi-wallet, notif HANYA kalau ada mint/sale
+// Wallet list dari env OPENSEA_WALLETS (comma separated) + hardcoded default
 const axios = require("axios");
 
-const WALLET = "0x806eca4d9e4cebea43df3d0fbb4867aa59422c7a";
-const OPENSEA_URL = `https://api.opensea.io/api/v2/events/accounts/${WALLET}`;
-const POLL_INTERVAL_MS = 60 * 1000; // cek setiap 60 detik
-const EVENT_TYPES = ["mint", "sale"];
+const POLL_INTERVAL_MS = 60 * 1000;
+const EVENT_TYPES      = ["mint", "sale"];
+
+// ── Parse daftar wallet dari env ───────────────────────────────────────────
+function getWalletList() {
+  const defaults = ["0x806eca4d9e4cebea43df3d0fbb4867aa59422c7a"];
+  const fromEnv  = process.env.OPENSEA_WALLETS
+    ? process.env.OPENSEA_WALLETS.split(",").map(w => w.trim().toLowerCase()).filter(Boolean)
+    : [];
+  // Gabungkan default + dari env, hilangkan duplikat
+  const all = [...new Set([...defaults, ...fromEnv])];
+  return all;
+}
+
+// ── Label wallet (opsional, dari env OPENSEA_WALLET_LABELS) ───────────────
+// Format: "0xabc=Alice,0xdef=Bob"
+function getWalletLabels() {
+  const labels = {};
+  if (process.env.OPENSEA_WALLET_LABELS) {
+    process.env.OPENSEA_WALLET_LABELS.split(",").forEach(pair => {
+      const [addr, name] = pair.split("=");
+      if (addr && name) labels[addr.trim().toLowerCase()] = name.trim();
+    });
+  }
+  return labels;
+}
 
 class OpenSeaMonitor {
   constructor(sendNotification) {
     this.sendNotification = sendNotification;
-    this.seenEventIds     = new Set();
     this.isRunning        = false;
     this.pollTimer        = null;
     this.apiKey           = process.env.OPENSEA_API_KEY || null;
-    this.pollCount        = 0;
-    this.errorCount       = 0;
-    this.lastPollOk       = null;
     this.startTime        = null;
+
+    // Per-wallet state
+    this.wallets          = getWalletList();
+    this.labels           = getWalletLabels();
+    this.seenEvents       = {}; // wallet → Set of event IDs
+    this.wallets.forEach(w => { this.seenEvents[w] = new Set(); });
   }
 
   start() {
     if (this.isRunning) return;
     this.isRunning = true;
     this.startTime = new Date();
-    // Hanya log ke console, TIDAK kirim Telegram
-    console.log("👁 OpenSea monitor started for wallet:", WALLET);
-    this._poll();
-    this.pollTimer = setInterval(() => this._poll(), POLL_INTERVAL_MS);
+    console.log(`👁 OpenSea monitor started — ${this.wallets.length} wallet(s):`, this.wallets);
+    this._pollAll();
+    this.pollTimer = setInterval(() => this._pollAll(), POLL_INTERVAL_MS);
   }
 
   stop() {
     if (this.pollTimer) clearInterval(this.pollTimer);
     this.isRunning = false;
-    // Hanya log ke console, TIDAK kirim Telegram
-    console.log("🛑 OpenSea monitor stopped. Polls:", this.pollCount);
+    console.log("🛑 OpenSea monitor stopped");
   }
 
-  async _poll() {
-    this.pollCount++;
-    try {
-      const events = await this._fetchEvents();
-      if (!events || events.length === 0) {
-        this.lastPollOk = new Date();
-        this.errorCount = 0;
-        return;
+  // ── Tambah wallet baru saat runtime ───────────────────────────────────
+  addWallet(address, label = null) {
+    const addr = address.toLowerCase();
+    if (this.wallets.includes(addr)) return false;
+    this.wallets.push(addr);
+    this.seenEvents[addr] = new Set();
+    if (label) this.labels[addr] = label;
+    console.log(`👁 Added wallet to monitor: ${addr} (${label || "no label"})`);
+    return true;
+  }
+
+  removeWallet(address) {
+    const addr = address.toLowerCase();
+    const idx  = this.wallets.indexOf(addr);
+    if (idx === -1) return false;
+    this.wallets.splice(idx, 1);
+    delete this.seenEvents[addr];
+    delete this.labels[addr];
+    console.log(`👁 Removed wallet from monitor: ${addr}`);
+    return true;
+  }
+
+  listWallets() {
+    return this.wallets.map(w => ({
+      address: w,
+      label: this.labels[w] || null,
+      seenEvents: this.seenEvents[w]?.size || 0,
+    }));
+  }
+
+  // ── Poll semua wallet ─────────────────────────────────────────────────
+  async _pollAll() {
+    for (const wallet of this.wallets) {
+      try {
+        await this._pollWallet(wallet);
+      } catch (e) {
+        console.error(`OpenSea poll error [${wallet}]:`, e.message);
       }
-
-      const newEvents = events.filter(e => {
-        const id = e.id || `${e.event_type}-${e.transaction}`;
-        if (this.seenEventIds.has(id)) return false;
-        this.seenEventIds.add(id);
-        if (this.seenEventIds.size > 500) {
-          const first = this.seenEventIds.values().next().value;
-          this.seenEventIds.delete(first);
-        }
-        return true;
-      });
-
-      this.lastPollOk = new Date();
-      this.errorCount = 0;
-
-      // Hanya kirim notif kalau ada event baru
-      for (const event of newEvents) {
-        const msg = this._formatEvent(event);
-        if (msg) {
-          try {
-            await this.sendNotification(msg);
-          } catch (e) {
-            console.error("Notify failed:", e.message);
-          }
-        }
-      }
-    } catch (err) {
-      this.errorCount++;
-      // Log error ke console saja, tidak spam Telegram
-      console.error(`OpenSea poll error #${this.errorCount}:`, err.message);
+      // Delay kecil antar wallet agar tidak rate limit
+      await new Promise(r => setTimeout(r, 2000));
     }
   }
 
-  async _fetchEvents() {
+  async _pollWallet(wallet) {
+    const events = await this._fetchEvents(wallet);
+    if (!events || events.length === 0) return;
+
+    const seen = this.seenEvents[wallet];
+    const newEvents = events.filter(e => {
+      const id = e.id || `${e.event_type}-${e.transaction}-${wallet}`;
+      if (seen.has(id)) return false;
+      seen.add(id);
+      if (seen.size > 500) {
+        const first = seen.values().next().value;
+        seen.delete(first);
+      }
+      return true;
+    });
+
+    for (const event of newEvents) {
+      const msg = this._formatEvent(event, wallet);
+      if (msg) {
+        try { await this.sendNotification(msg); }
+        catch (e) { console.error("Notify failed:", e.message); }
+      }
+    }
+  }
+
+  async _fetchEvents(wallet) {
+    const url     = `https://api.opensea.io/api/v2/events/accounts/${wallet}`;
     const headers = {
       "accept": "application/json",
       ...(this.apiKey ? { "x-api-key": this.apiKey } : {}),
     };
     try {
-      const res = await axios.get(OPENSEA_URL, {
+      const res = await axios.get(url, {
         params: { event_type: EVENT_TYPES, limit: 20 },
         headers,
         timeout: 10000,
@@ -92,33 +142,24 @@ class OpenSeaMonitor {
       return res.data?.asset_events || [];
     } catch (err) {
       if (err.response?.status === 401 || err.response?.status === 403) {
-        return await this._fetchFallback();
+        return await this._fetchFallback(wallet);
       }
-      if (err.response?.status === 429) {
-        console.warn("⚠️ OpenSea rate limited");
-        return [];
-      }
+      if (err.response?.status === 429) return [];
       throw err;
     }
   }
 
-  async _fetchFallback() {
+  async _fetchFallback(wallet) {
     try {
       const res = await axios.get(
         `https://api.simplehash.com/api/v0/nfts/transfers/accounts`,
         {
-          params: {
-            wallet_addresses: WALLET,
-            chains: "ethereum",
-            limit: 20,
-            order_by: "timestamp_desc",
-          },
+          params: { wallet_addresses: wallet, chains: "ethereum", limit: 20, order_by: "timestamp_desc" },
           headers: { "X-API-KEY": process.env.SIMPLEHASH_API_KEY || "" },
           timeout: 10000,
         }
       );
-      const transfers = res.data?.transfers || [];
-      return transfers
+      return (res.data?.transfers || [])
         .filter(t => t.from_address === "0x0000000000000000000000000000000000000000")
         .map(t => ({
           id: t.transaction_hash,
@@ -128,10 +169,8 @@ class OpenSeaMonitor {
             name: t.nft?.name || "Unknown NFT",
             identifier: t.nft?.token_id,
             collection: { name: t.collection?.name || "Unknown Collection" },
-            image_url: t.nft?.image_url,
             permalink: t.nft?.opensea_url,
           },
-          created_date: t.timestamp,
           quantity: t.quantity || 1,
         }));
     } catch (e) {
@@ -140,28 +179,32 @@ class OpenSeaMonitor {
     }
   }
 
-  _formatEvent(event) {
+  _formatEvent(event, wallet) {
     const type = event.event_type;
     if (!EVENT_TYPES.includes(type)) return null;
 
-    const nft  = event.nft || event.asset || {};
-    const name = nft.name || nft.identifier || "Unknown NFT";
-    const col  = nft.collection?.name || nft.collection || "Unknown Collection";
-    const link = nft.permalink || nft.opensea_url ||
-      `https://opensea.io/${WALLET}/activity`;
-    const qty  = event.quantity > 1 ? ` (x${event.quantity})` : "";
-    const time = new Date().toLocaleString("id-ID", {
-      timeZone: "Asia/Jakarta",
-      day: "2-digit", month: "short",
+    const nft    = event.nft || event.asset || {};
+    const name   = nft.name || nft.identifier || "Unknown NFT";
+    const col    = nft.collection?.name || "Unknown Collection";
+    const link   = nft.permalink || nft.opensea_url || `https://opensea.io/${wallet}/activity`;
+    const qty    = event.quantity > 1 ? ` (x${event.quantity})` : "";
+    const time   = new Date().toLocaleString("id-ID", {
+      timeZone: "Asia/Jakarta", day: "2-digit", month: "short",
       hour: "2-digit", minute: "2-digit"
     });
+
+    // Label wallet kalau ada
+    const label      = this.labels[wallet] || null;
+    const walletDisp = label
+      ? `${escMd(label)} (\`${wallet.slice(0,6)}...${wallet.slice(-4)}\`)`
+      : `\`${wallet.slice(0,8)}...${wallet.slice(-6)}\``;
 
     if (type === "mint") {
       return (
         `🌟 *MINT TERDETEKSI!*\n\n` +
+        `👛 Wallet: ${walletDisp}\n` +
         `🎨 NFT: *${escMd(name)}*${qty}\n` +
         `📦 Koleksi: ${escMd(col)}\n` +
-        `👛 Wallet: \`${WALLET.slice(0,8)}...${WALLET.slice(-6)}\`\n` +
         `🕐 Waktu: ${escMd(time)}\n` +
         `🔗 [Lihat di OpenSea](${link})`
       );
@@ -173,10 +216,10 @@ class OpenSeaMonitor {
         : "N/A";
       return (
         `💰 *SALE TERDETEKSI!*\n\n` +
+        `👛 Wallet: ${walletDisp}\n` +
         `🎨 NFT: *${escMd(name)}*${qty}\n` +
         `📦 Koleksi: ${escMd(col)}\n` +
         `💵 Harga: ${escMd(price)}\n` +
-        `👛 Wallet: \`${WALLET.slice(0,8)}...${WALLET.slice(-6)}\`\n` +
         `🕐 Waktu: ${escMd(time)}\n` +
         `🔗 [Lihat di OpenSea](${link})`
       );
