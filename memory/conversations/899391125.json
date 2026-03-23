@@ -1,57 +1,5 @@
 {
   "sessions": {
-    "tg_1774238279144": [
-      {
-        "role": "user",
-        "content": "Namamu siapa?",
-        "timestamp": "2026-03-23T03:58:01.577Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Saya ChatGPT.",
-        "timestamp": "2026-03-23T03:58:01.577Z"
-      },
-      {
-        "role": "user",
-        "content": "Sekarang namamu botol bottolol",
-        "timestamp": "2026-03-23T03:58:22.128Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Siap, sekarang namaku botol bottolol.",
-        "timestamp": "2026-03-23T03:58:22.128Z"
-      },
-      {
-        "role": "user",
-        "content": "Oke",
-        "timestamp": "2026-03-23T03:58:37.079Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Siap. Kalau mau, lanjutkan dengan perintahnya.",
-        "timestamp": "2026-03-23T03:58:37.079Z"
-      },
-      {
-        "role": "user",
-        "content": "Namamu siapa",
-        "timestamp": "2026-03-23T03:58:50.173Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Nama saya ChatGPT.",
-        "timestamp": "2026-03-23T03:58:50.173Z"
-      },
-      {
-        "role": "user",
-        "content": "Lah kan tadi sudah diberi nama",
-        "timestamp": "2026-03-23T03:59:08.024Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Iya, benar — maaf, tadi konteksnya kepotong. Kalau nama untuk format/heatmap MineLoot itu sudah Anda tentukan sebelumnya, kirim/ulang sekali lagi namanya ya, nanti saya pakai konsisten seterusnya. Kalau mau, saya juga bisa langsung lanjut pakai nama itu untuk status MineLoot berikutnya.",
-        "timestamp": "2026-03-23T03:59:08.024Z"
-      }
-    ],
     "tg_1774263239205": [
       {
         "role": "user",
@@ -189,7 +137,14 @@
         "content": "Siap, saya lanjut berdasarkan yang sudah disetujui.",
         "timestamp": "2026-03-23T10:59:28.145Z"
       }
+    ],
+    "tg_1774263582802": [
+      {
+        "role": "user",
+        "content": "Sudah?",
+        "timestamp": "2026-03-23T10:59:45.818Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T10:59:29.050Z"
+  "updatedAt": "2026-03-23T10:59:45.971Z"
 }
