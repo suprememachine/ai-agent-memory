@@ -1,17 +1,5 @@
 {
   "sessions": {
-    "tg_1774234761897": [
-      {
-        "role": "user",
-        "content": "mineloot_rewards",
-        "timestamp": "2026-03-23T02:59:25.101Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Skill yang tersedia saat ini untuk MineLoot hanya `mineloot_status`, bukan `mineloot_rewards`. Jika mau, saya bisa cek status round MineLoot terbaru untuk wallet Anda.",
-        "timestamp": "2026-03-23T02:59:25.101Z"
-      }
-    ],
     "tg_1774234878433": [
       {
         "role": "user",
@@ -179,7 +167,14 @@
         "content": "Bisa. Fitur wallet yang bisa dibuat umumnya:\n1. Buat wallet baru\n2. Import wallet\n3. Export wallet\n4. Cek address / balance / network\n5. Simpan terenkripsi\n\nUntuk istilahmu:\n- Pembuatan wallet = generate address + private key/seed phrase\n- Import wallet = restore dari seed phrase / private key / keystore JSON\n- Extract wallet = perlu diperjelas\n  - kalau maksudnya export private key/seed phrase, bisa\n  - kalau maksudnya mengambil wallet dari sistem/aplikasi lain tanpa izin, saya tidak bisa bantu\n\nStruktur skill yang disarankan:\n- create_wallet\n- import_wallet\n- export_wallet\n- validate_wallet\n- get_wallet_info\n\nContoh spesifikasi singkat:\n- Create wallet: pilih chain (ETH/BSC/SOL), hasilkan address, private key, mnemonic\n- Import wallet: input mnemonic/private key/keystore, validasi lalu tampilkan address\n- Export wallet: tampilkan private key/keystore setelah verifikasi user\n\nKalau mau, saya bisa bantu susunkan:\n- nama skill\n- schema input/output\n- alur keamanan\n- contoh kode\n\nTinggal jawab:\n1. Wallet untuk chain apa? (EVM/Solana/Bitcoin)\n2. Mau dalam bentuk skill JSON, API spec, atau contoh kode?\n3. 'Extract wallet' maksudnya export wallet sendiri atau parsing daftar address dari teks/file?",
         "timestamp": "2026-03-23T10:55:47.682Z"
       }
+    ],
+    "tg_1774263392194": [
+      {
+        "role": "user",
+        "content": "Chain evm dan solana dalam bentuk skill, ya export wallet sendiri",
+        "timestamp": "2026-03-23T10:56:38.812Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T10:55:48.867Z"
+  "updatedAt": "2026-03-23T10:56:39.120Z"
 }
