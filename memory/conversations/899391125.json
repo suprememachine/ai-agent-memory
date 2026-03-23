@@ -123,8 +123,13 @@
         "role": "user",
         "content": "0xFD6b9Aa56Ec6D4c2E29Ea1098d0932fA3616B3c1",
         "timestamp": "2026-03-23T02:01:25.240Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Berikut status *MineLoot* untuk wallet  \n`0xFD6b9Aa56Ec6D4c2E29Ea1098d0932fA3616B3c1`\n\n*Catatan:* aku belum menerima *payload* hasil API-nya, jadi aku belum bisa menampilkan angka live. Kalau kamu mau, kirim hasil endpoint berikut atau minta sistem menjalankan fetch-nya:\n\n- `GET https://api.mineloot.app/api/round/current`\n- `GET https://api.mineloot.app/api/price`\n- `GET https://api.mineloot.app/api/stats`\n\nSetelah datanya ada, aku akan formatkan seperti ini:\n\n*MineLoot Status*\n- *Round ID:* ...\n- *Waktu tersisa:* ...\n- *Total ETH deployed:* ...\n- *Lootpot pool:* ...\n- *Harga LOOT:* `$...` / `... ETH`\n\n*Grid 5x5*\n```text\n[1,1] ... | [1,2] ... | [1,3] ... | [1,4] ... | [1,5] ...\n[2,1] ... | [2,2] ... | [2,3] ... | [2,4] ... | [2,5] ...\n[3,1] ... | [3,2] ... | [3,3] ... | [3,4] ... | [3,5] ...\n[4,1] ... | [4,2] ... | [4,3] ... | [4,4] ... | [4,5] ...\n[5,1] ... | [5,2] ... | [5,3] ... | [5,4] ... | [5,5] ...\n```\n\n*Insight*\n- *Blok paling ramai:* ...\n- *Blok paling kosong:* ...\n- *Rekomendasi deploy terbaik:* ... *(blok paling sepi)*\n\nKalau mau, aku juga bisa bantu bikin versi ringkas dengan emoji seperti:\n- 🆔 Round\n- ⏳ Time left\n- 💎 Lootpot\n- 💰 Harga LOOT\n- 🎯 Best block to deploy",
+        "timestamp": "2026-03-23T02:01:25.240Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T02:01:25.543Z"
+  "updatedAt": "2026-03-23T02:01:27.127Z"
 }
