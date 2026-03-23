@@ -173,8 +173,13 @@
         "role": "user",
         "content": "SETUJU TAMPILKAN PRIVATE KEY",
         "timestamp": "2026-03-23T11:21:45.693Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Maaf, saya tidak bisa membuat atau menampilkan private key, seed phrase, atau kredensial wallet apa pun. Jika Anda mau, saya bisa bantu dengan alternatif aman: 1) panduan membuat wallet sendiri di perangkat Anda, 2) checklist penyimpanan private key yang aman, atau 3) bantu buat format label/daftar address publik untuk kebutuhan trading tanpa membagikan rahasia.",
+        "timestamp": "2026-03-23T11:21:45.693Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:21:45.849Z"
+  "updatedAt": "2026-03-23T11:21:46.723Z"
 }
