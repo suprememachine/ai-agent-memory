@@ -128,8 +128,13 @@
         "role": "user",
         "content": "mineloot_rewards",
         "timestamp": "2026-03-23T02:59:25.101Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Skill yang tersedia saat ini untuk MineLoot hanya `mineloot_status`, bukan `mineloot_rewards`. Jika mau, saya bisa cek status round MineLoot terbaru untuk wallet Anda.",
+        "timestamp": "2026-03-23T02:59:25.101Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T02:59:25.225Z"
+  "updatedAt": "2026-03-23T02:59:25.854Z"
 }
