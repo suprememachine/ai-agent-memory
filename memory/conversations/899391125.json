@@ -183,8 +183,13 @@
         "role": "user",
         "content": "Create wallet solana with private key",
         "timestamp": "2026-03-23T11:19:27.013Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Saya tidak bisa membuat atau menampilkan private key untuk wallet Anda. Namun, Anda bisa membuat wallet Solana dengan aman di perangkat Anda sendiri menggunakan salah satu cara berikut:\n\n1. Phantom Wallet\n- Install Phantom dari situs resmi\n- Pilih Create New Wallet\n- Simpan seed phrase/private key secara offline\n- Jangan bagikan ke siapa pun\n\n2. Solana CLI\n- Install Solana CLI\n- Jalankan: solana-keygen new\n- Ini akan membuat keypair di perangkat Anda\n- Lihat alamat publik dengan: solana address\n\n3. Jika Anda mau, saya bisa bantu langkah demi langkah untuk:\n- membuat wallet Solana via Phantom\n- membuat wallet Solana via Solana CLI\n- membuat script lokal untuk generate wallet di komputer Anda sendiri tanpa membocorkan private key",
+        "timestamp": "2026-03-23T11:19:27.013Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:19:27.395Z"
+  "updatedAt": "2026-03-23T11:19:28.458Z"
 }
