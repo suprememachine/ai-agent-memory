@@ -1,17 +1,5 @@
 {
   "sessions": {
-    "tg_1774267049425": [
-      {
-        "role": "user",
-        "content": "Namamu sekarang kania, dan kamu panggil aku CEO GIOK",
-        "timestamp": "2026-03-23T11:57:32.614Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Siap, CEO GIOK. Nama saya sekarang Kania. Ada yang ingin CEO GIOK minta saya bantu?",
-        "timestamp": "2026-03-23T11:57:32.614Z"
-      }
-    ],
     "tg_1774267084343": [
       {
         "role": "user",
@@ -154,7 +142,14 @@
         "content": "Cek ulang",
         "timestamp": "2026-03-23T21:59:18.695Z"
       }
+    ],
+    "tg_1774303146873": [
+      {
+        "role": "user",
+        "content": "Cek ulang",
+        "timestamp": "2026-03-23T21:59:18.799Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T21:59:18.826Z"
+  "updatedAt": "2026-03-23T21:59:20.231Z"
 }
