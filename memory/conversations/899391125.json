@@ -123,8 +123,13 @@
         "role": "assistant",
         "content": "Maksud Anda apa dengan \"Skilld\"? Jika Anda ingin memakai skill tertentu, sebutkan saja, misalnya: mineloot_status, web_search, atau lainnya.",
         "timestamp": "2026-03-23T03:49:31.836Z"
+      },
+      {
+        "role": "user",
+        "content": "Skill",
+        "timestamp": "2026-03-23T03:49:41.688Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T03:49:33.796Z"
+  "updatedAt": "2026-03-23T03:49:41.943Z"
 }
