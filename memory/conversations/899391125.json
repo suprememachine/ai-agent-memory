@@ -228,8 +228,13 @@
         "role": "assistant",
         "content": "Baik, wallet yang dimaksud adalah Solana. Silakan lanjutkan detail permintaannya untuk wallet Solana tersebut.",
         "timestamp": "2026-03-23T11:12:56.312Z"
+      },
+      {
+        "role": "user",
+        "content": "Buatkan wallet solana",
+        "timestamp": "2026-03-23T11:13:11.519Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:12:57.148Z"
+  "updatedAt": "2026-03-23T11:13:11.639Z"
 }
