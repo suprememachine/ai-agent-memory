@@ -128,8 +128,13 @@
         "role": "user",
         "content": "Skill",
         "timestamp": "2026-03-23T03:49:41.688Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Skill yang tersedia saat ini: web_search, code_runner, http_request, text_transform, reminder, image_generate, mineloot_status, cek_wallet_opensea.",
+        "timestamp": "2026-03-23T03:49:41.688Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T03:49:41.943Z"
+  "updatedAt": "2026-03-23T03:49:42.695Z"
 }
