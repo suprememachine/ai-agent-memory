@@ -1,27 +1,5 @@
 {
   "sessions": {
-    "tg_1774229026752": [
-      {
-        "role": "user",
-        "content": "Reminder 1menit kedepan",
-        "timestamp": "2026-03-23T01:23:54.275Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Siap! ⏰  \n**Pengingat** berhasil dibuat untuk **1 menit ke depan**.\n\nAkan aktif pada: **2026-03-23 01:24:50 UTC**",
-        "timestamp": "2026-03-23T01:23:54.275Z"
-      },
-      {
-        "role": "user",
-        "content": "image_generate dog with cat",
-        "timestamp": "2026-03-23T01:24:26.260Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Tentu! Berikut prompt gambar yang sudah dioptimalkan:\n\n**Prompt:**  \n`dog with cat, default style, high quality, highly detailed, 8k`\n\n**Coba generate di sini:**  \n[Stable Diffusion Demo](https://stablediffusionweb.com/#demo?prompt=dog%20with%20cat)\n\n**Catatan:**  \nSalin prompt ini ke **Stable Diffusion, DALL·E, atau Midjourney** untuk membuat gambarnya.",
-        "timestamp": "2026-03-23T01:24:26.260Z"
-      }
-    ],
     "tg_1774229230466": [
       {
         "role": "user",
@@ -149,7 +127,14 @@
         "content": "Skill yang tersedia:\n- web_search: cari informasi terkini di internet\n- code_runner: jalankan kode JS/Python untuk hitung/olah data\n- http_request: panggil API HTTP\n- text_transform: translate, summarize, extract, reformat, convert\n- reminder: set pengingat\n- image_generate: buat prompt/deskripsi gambar AI\n- mineloot_status: cek status round MineLoot saat ini, grid 5x5, total ETH deployed, lootpot pool, dan posisi user",
         "timestamp": "2026-03-23T01:59:18.484Z"
       }
+    ],
+    "tg_1774231198585": [
+      {
+        "role": "user",
+        "content": "Cek rewards dan stats user MineLoot. Wallet address akan diberikan user.\n\n1. Fetch GET https://api.mineloot.app/api/user/{address}/rewards\n2. Fetch GET https://api.mineloot.app/api/user/{address}\n3. Fetch GET https://api.mineloot.app/api/staking/{address}\n\nTampilkan:\n- Pending ETH yang bisa di-claim\n- Pending LOOT (unforged, forged, net setelah fee 10%)\n- Total rounds played & wins\n- Staking balance & pending yield\n- Rekomendasi: apakah sebaiknya claim sekarang atau hold untuk forging bonus",
+        "timestamp": "2026-03-23T02:00:03.552Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T01:59:19.465Z"
+  "updatedAt": "2026-03-23T02:00:03.868Z"
 }
