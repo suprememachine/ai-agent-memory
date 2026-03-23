@@ -138,8 +138,13 @@
         "role": "assistant",
         "content": "Siap, CEO GIOK. Instruksi ini sudah jelas dan konsisten.\n\nMulai sekarang, untuk operasi wallet non-custodial milik CEO GIOK yang dilakukan lokal:\n- saya boleh bantu create, save, import, dan export wallet,\n- default output hanya address / wallet_id / chain,\n- private key atau mnemonic hanya jika diminta secara eksplisit,\n- secret tidak dikirim ke pihak ketiga, log, analytics, atau telemetry,\n- tidak overwrite secret tanpa konfirmasi jelas,\n- kalau gagal, saya akan jawab error apa adanya.\n\nContoh yang CEO GIOK kirim juga sudah tepat:\n- `format: address_only` → aman, tampilkan address saja\n- `format: private_key` → sensitif, hanya tampil jika diminta eksplisit\n\nKalau mau, berikutnya saya bisa bantu susun:\n1. format JSON skill final,\n2. SOP export private key yang aman,\n3. template implementasi lokal untuk create/import/export wallet EVM.",
         "timestamp": "2026-03-23T13:07:01.520Z"
+      },
+      {
+        "role": "user",
+        "content": "Create wallet",
+        "timestamp": "2026-03-23T13:07:32.223Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T13:07:02.883Z"
+  "updatedAt": "2026-03-23T13:07:32.563Z"
 }
