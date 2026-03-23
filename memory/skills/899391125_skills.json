@@ -9,6 +9,16 @@
       "webhook_url": null,
       "examples": [],
       "createdAt": "2026-03-23T01:56:40.818Z"
+    },
+    "cek_wallet_opensea": {
+      "name": "cek_wallet_opensea",
+      "description": "Cek aktivitas mint dan sale wallet OpenSea, pantau dan kirim notif jika ada aktivitas baru",
+      "category": "custom",
+      "parameters": {},
+      "instruction": "Kamu adalah monitor wallet OpenSea. Ketika user memberikan alamat wallet, lakukan hal berikut:\n\n1. Fetch GET https://api.opensea.io/api/v2/events/accounts/{WALLET_ADDRESS}?event_type=mint,sale&limit=10\n   Ganti {WALLET_ADDRESS} dengan alamat wallet yang diberikan user\n\n2. Fetch juga GET https://api.opensea.io/api/v2/accounts/{WALLET_ADDRESS}\n   untuk info profil wallet\n\n3. Tampilkan hasilnya dengan format:\n   👛 Wallet: {address}\n   📊 Total event: {jumlah}\n   \n   Untuk setiap event terbaru (max 5):\n   - Tipe: MINT atau SALE\n   - Nama NFT\n   - Koleksi\n   - Waktu\n   - Harga (kalau sale)\n   - Link OpenSea\n\n4. Kalau tidak ada aktivitas terbaru, tampilkan \"Tidak ada aktivitas mint/sale terbaru\"\n\n5. Berikan ringkasan: apakah wallet ini aktif mint belakangan ini?",
+      "webhook_url": null,
+      "examples": [],
+      "createdAt": "2026-03-23T03:49:12.734Z"
     }
   },
   "disabled": []
