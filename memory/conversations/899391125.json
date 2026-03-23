@@ -1,17 +1,5 @@
 {
   "sessions": {
-    "tg_1774230452553": [
-      {
-        "role": "user",
-        "content": "llm",
-        "timestamp": "2026-03-23T01:47:36.758Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Maksudnya apa dengan \"llm\"? Kalau mau, saya bisa bantu jelaskan apa itu LLM, cara kerjanya, atau bantu tugas terkait LLM.",
-        "timestamp": "2026-03-23T01:47:36.758Z"
-      }
-    ],
     "tg_1774231049879": [
       {
         "role": "user",
@@ -134,7 +122,14 @@
         "content": "Skill yang tersedia untuk MineLoot saat ini adalah `mineloot_status`, bukan `mineloot_rewards`.\n\nKalau mau, kirim wallet address kamu dan saya bisa cek status MineLoot saat ini.",
         "timestamp": "2026-03-23T02:23:39.735Z"
       }
+    ],
+    "tg_1774232636204": [
+      {
+        "role": "user",
+        "content": "0xFD6b9Aa56Ec6D4c2E29Ea1098d0932fA3616B3c1",
+        "timestamp": "2026-03-23T02:24:10.468Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T02:23:40.857Z"
+  "updatedAt": "2026-03-23T02:24:10.729Z"
 }
