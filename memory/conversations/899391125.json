@@ -128,8 +128,13 @@
         "role": "assistant",
         "content": "Siap. Berikut script Node.js paling singkat untuk membuat wallet EVM secara lokal dengan ethers.\n\n1. Install dulu:\nnpm install ethers\n\n2. Simpan sebagai create-wallet.js:\nconst { Wallet } = require('ethers');\n\nconst wallet = Wallet.createRandom();\n\nconsole.log('Address:', wallet.address);\nconsole.log('Private Key:', wallet.privateKey);\nconsole.log('Mnemonic:', wallet.mnemonic?.phrase || 'N/A');\n\n3. Jalankan:\nnode create-wallet.js\n\nKalau mau versi yang lebih aman, tampilkan hanya address + simpan rahasia ke file .env:\nconst { Wallet } = require('ethers');\nconst fs = require('fs');\n\nconst wallet = Wallet.createRandom();\n\nfs.writeFileSync('.env', `PRIVATE_KEY=${wallet.privateKey}\\nMNEMONIC=\"${wallet.mnemonic?.phrase || ''}\"\\n`);\nconsole.log('Address:', wallet.address);\nconsole.log('Rahasia disimpan ke .env');\n\nKalau mau, saya juga bisa buatkan versi:\n- TypeScript\n- ethers v6 ESM\n- generate banyak wallet sekaligus\n- import dari mnemonic/private key",
         "timestamp": "2026-03-23T11:47:53.673Z"
+      },
+      {
+        "role": "user",
+        "content": "Ya buatkan saja",
+        "timestamp": "2026-03-23T11:48:14.358Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:47:55.761Z"
+  "updatedAt": "2026-03-23T11:48:14.720Z"
 }
