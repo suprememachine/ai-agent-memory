@@ -133,8 +133,13 @@
         "role": "user",
         "content": "Cek rewards dan stats user MineLoot. Wallet address akan diberikan user.\n\n1. Fetch GET https://api.mineloot.app/api/user/{address}/rewards\n2. Fetch GET https://api.mineloot.app/api/user/{address}\n3. Fetch GET https://api.mineloot.app/api/staking/{address}\n\nTampilkan:\n- Pending ETH yang bisa di-claim\n- Pending LOOT (unforged, forged, net setelah fee 10%)\n- Total rounds played & wins\n- Staking balance & pending yield\n- Rekomendasi: apakah sebaiknya claim sekarang atau hold untuk forging bonus",
         "timestamp": "2026-03-23T02:00:03.552Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Siap. Kirim wallet address kamu dulu, nanti saya cek:\n- Pending ETH yang bisa di-claim\n- Pending LOOT (unforged, forged, net setelah fee 10%)\n- Total rounds played & wins\n- Staking balance & pending yield\n- Rekomendasi: claim sekarang atau hold untuk forging bonus",
+        "timestamp": "2026-03-23T02:00:03.552Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T02:00:03.868Z"
+  "updatedAt": "2026-03-23T02:00:05.491Z"
 }
