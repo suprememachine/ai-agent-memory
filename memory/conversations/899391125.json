@@ -1,17 +1,5 @@
 {
   "sessions": {
-    "tg_1774264872619": [
-      {
-        "role": "user",
-        "content": "Yang baru, output private key dan address, label nya micin kebutuhan trading",
-        "timestamp": "2026-03-23T11:21:18.115Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Bisa. Sebelum saya lanjut membuat wallet Solana baru dengan output private key dan address, saya perlu konfirmasi singkat untuk memastikan format yang Anda inginkan:\n1. Private key mau dalam format apa: base58, array bytes, atau seed phrase?\n2. Label wallet sudah saya catat: \"micin kebutuhan trading\". Benar?\n3. Mau saya tampilkan langsung di chat setelah dibuat?",
-        "timestamp": "2026-03-23T11:21:18.115Z"
-      }
-    ],
     "tg_1774264876749": [
       {
         "role": "user",
@@ -139,7 +127,14 @@
         "content": "Siap, CEO GIOK. Nama saya sekarang Kania. Ada yang ingin CEO GIOK minta saya bantu?",
         "timestamp": "2026-03-23T11:57:32.614Z"
       }
+    ],
+    "tg_1774267084343": [
+      {
+        "role": "user",
+        "content": "Oke buatkan address / wallet evm multichain beserta private key nya",
+        "timestamp": "2026-03-23T11:58:16.490Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T11:57:33.405Z"
+  "updatedAt": "2026-03-23T11:58:16.849Z"
 }
