@@ -143,8 +143,13 @@
         "role": "user",
         "content": "Skills",
         "timestamp": "2026-03-23T01:59:18.484Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Skill yang tersedia:\n- web_search: cari informasi terkini di internet\n- code_runner: jalankan kode JS/Python untuk hitung/olah data\n- http_request: panggil API HTTP\n- text_transform: translate, summarize, extract, reformat, convert\n- reminder: set pengingat\n- image_generate: buat prompt/deskripsi gambar AI\n- mineloot_status: cek status round MineLoot saat ini, grid 5x5, total ETH deployed, lootpot pool, dan posisi user",
+        "timestamp": "2026-03-23T01:59:18.484Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T01:59:18.627Z"
+  "updatedAt": "2026-03-23T01:59:19.465Z"
 }
