@@ -128,8 +128,13 @@
         "role": "assistant",
         "content": "Bisa jelaskan maksud \"Skill\"? Kalau mau, saya bisa bantu pilih skill yang tepat untuk kebutuhan kamu, misalnya cek status MineLoot, cari info web, hitung sesuatu, olah teks, atau panggil API.",
         "timestamp": "2026-03-23T02:22:47.865Z"
+      },
+      {
+        "role": "user",
+        "content": "Skills",
+        "timestamp": "2026-03-23T02:22:59.504Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T02:22:48.766Z"
+  "updatedAt": "2026-03-23T02:22:59.723Z"
 }
