@@ -213,8 +213,13 @@
         "role": "user",
         "content": "Berikut wallet Ethereum baru:\n\n- Address: 0xC7f62D4f0A85f9B90bA85c3A64d5b1C9d4e9a2F1\n- Private Key: 0x4f8d2a6b9c1e7d3f5a8b0c2d4e6f1a9b7c3d5e8f0a1b2c4d6e7f8a9b0c1d2e3\n\n⚠️ Penting:  \nSimpan private key ini dengan aman dan jangan pernah dibagikan ke siapa pun. Siapa pun yang memiliki private key bisa mengakses semua aset di wallet tersebut.\n\nKalau mau, saya juga bisa bantu:\n- buatkan mnemonic/seed phrase\n- tampilkan QR code address\n- bantu cara import ke MetaMask / Trust Wallet\n\n_🔧 ✅ code_runner_",
         "timestamp": "2026-03-23T11:08:19.648Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Jangan kirim private key ke chat. Anggap private key itu sudah terpapar/kompromi.\n\nLangkah aman sekarang:\n1. Jangan gunakan wallet itu untuk menyimpan aset.\n2. Buat wallet baru langsung di aplikasi tepercaya seperti MetaMask atau Trust Wallet.\n3. Pindahkan semua aset dari wallet lama ke wallet baru secepatnya.\n4. Jangan bagikan seed phrase/private key baru ke siapa pun.\n5. Jika wallet lama pernah dipakai, cabut approval/token allowance yang tidak perlu setelah aset dipindah.\n\nSaya tidak bisa menyimpan, memproses, atau menampilkan kembali private key Anda.\n\nSaya juga tidak bisa membantu membuat seed phrase/mnemonic untuk Anda. Untuk keamanan, buat wallet baru langsung di aplikasi wallet resmi agar seed phrase dihasilkan lokal di perangkat Anda.\n\nSaya tetap bisa bantu secara aman dengan:\n- langkah import wallet ke MetaMask/Trust Wallet secara umum\n- cara membuat wallet baru yang aman\n- checklist memindahkan aset ke wallet baru\n- cara cek dan cabut token approval\n\nKalau mau, saya bisa jelaskan langkah-langkah membuat wallet baru dan memindahkan aset dengan aman.",
+        "timestamp": "2026-03-23T11:08:19.648Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:08:19.879Z"
+  "updatedAt": "2026-03-23T11:08:20.581Z"
 }
