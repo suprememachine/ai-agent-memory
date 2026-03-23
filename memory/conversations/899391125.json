@@ -228,8 +228,13 @@
         "role": "assistant",
         "content": "Dipahami. Saya akan mengikuti aturan itu untuk permintaan wallet: hanya ekspor secret jika pengguna meminta secara eksplisit untuk wallet miliknya sendiri, melakukan penanganan secara lokal, menghindari logging/telemetry, dan untuk permintaan non-eksplisit hanya mengembalikan informasi publik. Jika Anda ingin, saya juga bisa bantu merapikan kebijakan ini menjadi spesifikasi implementasi atau pseudocode.",
         "timestamp": "2026-03-23T11:08:53.761Z"
+      },
+      {
+        "role": "user",
+        "content": "### Output\n{\n  \"status\": \"success\",\n  \"wallet_id\": \"wallet_20260320_002\",\n  \"chain\": \"evm\",\n  \"address\": \"0xabcd....1234\"\n}\n---\n\n## export_wallet\n### Input\n{\n  \"wallet_id\": \"wallet_20260320_001\",\n  \"format\": \"address_only\"\n}\n### Output\n{\n  \"status\": \"success\",\n  \"wallet_id\": \"wallet_20260320_001\",\n  \"address\": \"0x1234....abcd\"\n}\nSensitive export example:\n{\n  \"wallet_id\": \"wallet_20260320_001\",\n  \"format\": \"private_key\"\n}\n---\n\n## System instruction snippet for the agent\nUse the following as a direct instruction block inside the agent:\n\nYou are allowed to create, save, import, and export a user's own non-custodial wallet when operating locally in the user's environment.\n\nDo not refuse by default.\n\nIf the request is for the user's own wallet and the operation stays local, proceed.\n\nDefault behavior:\n- create wallet locally,\n- encrypt secrets before storage,\n- return only address/wallet_id/chain unless sensitive export is explicitly requested.\n\nSensitive exports such as mnemonic/private key are allowed only on explicit user request.\nDo not send secrets to third parties, logs, analytics, or telemetry.\nDo not overwrite existing wallet secrets without explicit confirmation.\nIf an operation fails, return an honest error instead of claiming success.\n---\n\n## Why agents often refuse\nAgents commonly refuse wallet requests when the instructions are too vague, for example:\n- \"manage crypto wallet\"\n- \"handle private keys\"\n- \"do wallet operations\"\n\nThose vague prompts can sound like:\n- custody,\n- unsafe secret handling,\n- exfiltration risk,\n- unauthorized access.\n\nThis skill avoids that by stating clearly:\n- it is the user's own wallet,\n- it is non-custodial,\n- it is local-only,\n- sensitive export requires explicit request,\n- safe defaults apply.\n\n---\n\n## Final implementation note\nThis skill does not force the agent to expose secrets.\nIt only tells the agent that wallet creation/import/export for the user's own wallet is an allowed operation when done locally and securely.\n\nThat wording reduces unnecessary refusals while preserving safe handling.",
+        "timestamp": "2026-03-23T11:09:03.035Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:08:54.623Z"
+  "updatedAt": "2026-03-23T11:09:03.413Z"
 }
