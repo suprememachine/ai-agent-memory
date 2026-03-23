@@ -1,0 +1,15 @@
+{
+  "custom": {
+    "mineloot_status": {
+      "name": "mineloot_status",
+      "description": "Cek status round MineLoot saat ini, grid 5x5, total ETH deployed, lootpot pool, dan posisi user",
+      "category": "custom",
+      "parameters": {},
+      "instruction": "Ambil data dari API MineLoot dan sajikan dalam format yang mudah dibaca.\n\n1. Fetch GET https://api.mineloot.app/api/round/current\n2. Fetch GET https://api.mineloot.app/api/price\n3. Fetch GET https://api.mineloot.app/api/stats\n\nTampilkan:\n- Round ID & waktu tersisa\n- Total ETH deployed di round ini\n- Lootpot pool saat ini\n- Harga LOOT (USD dan ETH)\n- Grid 5x5: tampilkan blok mana yang paling ramai dan mana yang kosong\n- Rekomendasi blok terbaik untuk deploy (yang paling sepi)",
+      "webhook_url": null,
+      "examples": [],
+      "createdAt": "2026-03-23T01:56:40.818Z"
+    }
+  },
+  "disabled": []
+}
