@@ -223,8 +223,13 @@
         "role": "user",
         "content": "Simpan ke github memory",
         "timestamp": "2026-03-23T11:02:52.076Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Bisa. Kirim detail berikut:\n1. repo GitHub (owner/repo)\n2. branch\n3. path/file tujuan\n4. isi yang mau disimpan\n5. GitHub token/PAT jika ingin saya bantu via API\n\nJika maksudmu simpan percakapan/wallet tadi ke GitHub, balas saja format ini:\nrepo: owner/repo\nbranch: main\npath: memory/session.txt\nisi: ...",
+        "timestamp": "2026-03-23T11:02:52.076Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:02:52.212Z"
+  "updatedAt": "2026-03-23T11:02:53.186Z"
 }
