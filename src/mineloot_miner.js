@@ -9,8 +9,8 @@ const ALL_BLOCKS          = Array.from({ length: 25 }, (_, i) => i);
 
 const GRID_MINING_ABI = [
   "function deploy(uint8[] calldata blockIds) payable",
-  "function claimETH() nonpayable",
-  "function claimLOOT() nonpayable",
+  "function claimETH()",
+  "function claimLOOT()",
   "function getCurrentRoundInfo() view returns (uint64, uint256, uint256, uint256, uint256, bool)",
   "function getMinerInfo(uint64 roundId, address miner) view returns (uint256, uint256, bool)",
   "function getTotalPendingRewards(address miner) view returns (uint256, uint256, uint256, uint64)",
