@@ -1,17 +1,5 @@
 {
   "sessions": {
-    "tg_1774231104225": [
-      {
-        "role": "user",
-        "content": "llm",
-        "timestamp": "2026-03-23T01:58:28.974Z"
-      },
-      {
-        "role": "assistant",
-        "content": "LLM adalah singkatan dari Large Language Model, yaitu model AI yang dilatih dengan sangat banyak teks untuk memahami dan menghasilkan bahasa manusia. Contohnya dipakai untuk chat AI, merangkum, menerjemahkan, menulis, dan menjawab pertanyaan. Kalau mau, saya bisa jelaskan versi sederhana, versi teknis, atau cara kerja LLM.",
-        "timestamp": "2026-03-23T01:58:28.974Z"
-      }
-    ],
     "tg_1774231108275": [
       {
         "role": "user",
@@ -134,7 +122,14 @@
         "content": "Skill yang tersedia saat ini untuk MineLoot hanya `mineloot_status`, bukan `mineloot_rewards`. Jika mau, saya bisa cek status round MineLoot terbaru untuk wallet Anda.",
         "timestamp": "2026-03-23T02:59:25.101Z"
       }
+    ],
+    "tg_1774234878433": [
+      {
+        "role": "user",
+        "content": "mineloot_status",
+        "timestamp": "2026-03-23T03:01:27.212Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T02:59:25.854Z"
+  "updatedAt": "2026-03-23T03:01:27.545Z"
 }
