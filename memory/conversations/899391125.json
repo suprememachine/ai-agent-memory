@@ -133,8 +133,13 @@
         "role": "user",
         "content": "llm",
         "timestamp": "2026-03-23T01:58:33.760Z"
+      },
+      {
+        "role": "assistant",
+        "content": "LLM adalah singkatan dari Large Language Model, yaitu model AI yang dilatih dengan sangat banyak teks untuk memahami dan menghasilkan bahasa manusia. Contohnya dipakai untuk chatbot, rangkum teks, terjemahan, menulis kode, dan menjawab pertanyaan. Kalau mau, saya bisa jelaskan versi sederhana, versi teknis, atau kasih contoh cara kerjanya.",
+        "timestamp": "2026-03-23T01:58:33.760Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T01:58:33.982Z"
+  "updatedAt": "2026-03-23T01:58:34.737Z"
 }
