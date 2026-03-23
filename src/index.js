@@ -52,7 +52,7 @@ async function main() {
   console.log("🤖 Telegram bot started (long polling)");
 
   // Start OpenSea monitor setelah bot ready
-  opensea.start();
+  await opensea.start();
 
   // ── MineLoot Miner
   const miner = new MineLootMiner(sendMsg);
