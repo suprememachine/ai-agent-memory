@@ -218,8 +218,13 @@
         "role": "assistant",
         "content": "Siap. Mau dibuatkan wallet untuk chain apa?\n\nPilihan umum:\n- EVM (Ethereum / Base / BNB / Polygon / Arbitrum)\n- Solana\n- Bitcoin\n\nKalau mau cepat, balas saja salah satu:\n- \"Buatkan wallet EVM\"\n- \"Buatkan wallet Solana\"\n- \"Buatkan wallet Bitcoin\"",
         "timestamp": "2026-03-23T11:12:44.213Z"
+      },
+      {
+        "role": "user",
+        "content": "Solana",
+        "timestamp": "2026-03-23T11:12:56.312Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:12:45.171Z"
+  "updatedAt": "2026-03-23T11:12:56.430Z"
 }
