@@ -1,17 +1,5 @@
 {
   "sessions": {
-    "tg_1774228998914": [
-      {
-        "role": "user",
-        "content": "Cek didatabase apakah ada opensea monitor",
-        "timestamp": "2026-03-23T01:23:25.101Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Bisa, tapi saya perlu detail databasenya dulu. Kirim salah satu dari ini:\n1. Jenis database (MySQL/PostgreSQL/MongoDB/dll)\n2. Host/port/nama database\n3. Tabel/koleksi yang mau dicek\n4. Kredensial atau endpoint API yang bisa diakses\n5. Jika maksudnya file lokal/dump, kirim isi atau strukturnya\n\nKalau mau, saya juga bisa bantu susun query untuk cek apakah ada data bernama 'opensea monitor'.",
-        "timestamp": "2026-03-23T01:23:25.101Z"
-      }
-    ],
     "tg_1774229026752": [
       {
         "role": "user",
@@ -149,7 +137,14 @@
         "content": "Siap. Kirim wallet address kamu dulu, nanti saya cek:\n- Pending ETH yang bisa di-claim\n- Pending LOOT: unforged, forged, dan net setelah fee 10%\n- Total rounds played & wins\n- Staking balance & pending yield\n- Rekomendasi: claim sekarang atau hold untuk forging bonus",
         "timestamp": "2026-03-23T01:58:39.650Z"
       }
+    ],
+    "tg_1774231154394": [
+      {
+        "role": "user",
+        "content": "Skills",
+        "timestamp": "2026-03-23T01:59:18.484Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T01:58:40.461Z"
+  "updatedAt": "2026-03-23T01:59:18.627Z"
 }
