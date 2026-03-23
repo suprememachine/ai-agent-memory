@@ -143,8 +143,13 @@
         "role": "user",
         "content": "Siapa nama saya dan nama kamu?",
         "timestamp": "2026-03-23T12:25:05.485Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Nama kamu CEO GIOK, dan nama saya Kania.",
+        "timestamp": "2026-03-23T12:25:05.485Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T12:25:05.614Z"
+  "updatedAt": "2026-03-23T12:25:06.398Z"
 }
