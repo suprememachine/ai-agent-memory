@@ -143,8 +143,13 @@
         "role": "assistant",
         "content": "Siap, sekarang namaku botol bottolol.",
         "timestamp": "2026-03-23T03:58:22.128Z"
+      },
+      {
+        "role": "user",
+        "content": "Oke",
+        "timestamp": "2026-03-23T03:58:37.079Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T03:58:22.988Z"
+  "updatedAt": "2026-03-23T03:58:37.383Z"
 }
