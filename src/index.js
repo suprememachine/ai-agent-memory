@@ -3,8 +3,9 @@ const express = require("express");
 const { createBot } = require("./telegramBot");
 const { AIAgent } = require("./agent");
 const { GitHubMemory } = require("./memory");
+const { OpenSeaMonitor } = require("./opensea_monitor");
 
-// Validasi provider-aware: cek API key sesuai LLM_PROVIDER yang dipilih
+// Validasi provider-aware
 const provider = (process.env.LLM_PROVIDER || "qwen").toLowerCase();
 const providerKeyMap = {
   gemini: "GEMINI_API_KEY",
@@ -19,7 +20,8 @@ const required = [
   requiredLLMKey,
   "GITHUB_TOKEN",
   "GITHUB_OWNER",
-  "GITHUB_REPO"
+  "GITHUB_REPO",
+  "TELEGRAM_OWNER_ID",  // wajib untuk monitor — tahu siapa yang dapat notif
 ];
 
 const missing = required.filter(k => !process.env[k]);
@@ -45,15 +47,39 @@ async function main() {
   bot.start();
   console.log("🤖 Telegram bot started (long polling)");
 
-  // Express health check — Railway requires HTTP listener
+  // ── OpenSea Monitor ────────────────────────────────────────────────────
+  const OWNER_CHAT_ID = process.env.TELEGRAM_OWNER_ID;
+  const monitor = new OpenSeaMonitor(async (message) => {
+    try {
+      await bot.api.sendMessage(OWNER_CHAT_ID, message, { parse_mode: "Markdown" });
+    } catch (e) {
+      console.error("Failed to send monitor notif:", e.message);
+    }
+  });
+  monitor.start();
+  console.log("👁 OpenSea monitor active");
+
+  // Express health check
   const app = express();
-  app.get("/", (_, res) => res.json({ status: "ok", service: "telegram-ai-agent", provider, uptime: process.uptime() }));
-  app.get("/health", (_, res) => res.json({ status: "ok", provider, model: process.env.MODEL_NAME || "auto" }));
+  app.get("/", (_, res) => res.json({
+    status: "ok",
+    service: "telegram-ai-agent",
+    provider,
+    opensea_monitor: monitor.isRunning,
+    uptime: process.uptime()
+  }));
+  app.get("/health", (_, res) => res.json({
+    status: "ok",
+    provider,
+    model: process.env.MODEL_NAME || "auto",
+    opensea_monitor: monitor.isRunning,
+  }));
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => console.log(`✅ Health check server on port ${PORT}`));
 
   process.on("SIGTERM", async () => {
     console.log("Shutting down...");
+    monitor.stop();
     await bot.stop();
     process.exit(0);
   });
