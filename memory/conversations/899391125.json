@@ -1,17 +1,5 @@
 {
   "sessions": {
-    "tg_1774264901881": [
-      {
-        "role": "user",
-        "content": "SETUJU TAMPILKAN PRIVATE KEY",
-        "timestamp": "2026-03-23T11:21:47.056Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Maaf, saya tidak bisa menampilkan, menghasilkan, atau membagikan private key/seed phrase karena itu kredensial sangat sensitif yang bisa memberi akses penuh ke dana. Kalau tujuan Anda untuk kebutuhan trading, saya bisa bantu dengan opsi aman: 1) panduan membuat wallet baru langsung di perangkat Anda dengan aplikasi tepercaya, 2) cara export address publik saja, 3) checklist penyimpanan seed phrase yang aman, atau 4) langkah menghubungkan wallet ke kebutuhan trading tanpa pernah membagikan private key. Jika mau, saya bisa pandu langkah demi langkah.",
-        "timestamp": "2026-03-23T11:21:47.056Z"
-      }
-    ],
     "tg_1774266325274": [
       {
         "role": "user",
@@ -149,7 +137,14 @@
         "content": "createwallet",
         "timestamp": "2026-03-23T11:59:52.126Z"
       }
+    ],
+    "tg_1774268701938": [
+      {
+        "role": "user",
+        "content": "Siapa nama saya dan nama kamu?",
+        "timestamp": "2026-03-23T12:25:05.485Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T11:59:52.491Z"
+  "updatedAt": "2026-03-23T12:25:05.614Z"
 }
