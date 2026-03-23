@@ -173,8 +173,13 @@
         "role": "user",
         "content": "Addskill",
         "timestamp": "2026-03-23T10:54:02.367Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Bisa. Skill apa yang ingin ditambahkan, dan untuk fungsi apa?",
+        "timestamp": "2026-03-23T10:54:02.367Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T10:54:02.522Z"
+  "updatedAt": "2026-03-23T10:54:03.281Z"
 }
