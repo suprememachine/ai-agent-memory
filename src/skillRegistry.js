@@ -4,11 +4,10 @@ const { GitHubMemory } = require("./memory");
 class SkillRegistry {
   constructor() {
     this.memory = new GitHubMemory();
-    this.skills = new Map(); // name → skill definition
+    this.skills = new Map();
     this.builtinSkills = this._defineBuiltins();
   }
 
-  // ── Built-in skills yang selalu tersedia ─────────────────────────────────
   _defineBuiltins() {
     return {
       web_search: {
@@ -19,7 +18,7 @@ class SkillRegistry {
         parameters: {
           query: { type: "string", required: true, description: "Search query" }
         },
-        examples: ["cari berita terbaru tentang AI", "search latest bitcoin price", "find information about X"]
+        examples: ["cari berita terbaru tentang AI", "search latest bitcoin price"]
       },
       code_runner: {
         name: "code_runner",
@@ -30,7 +29,7 @@ class SkillRegistry {
           code: { type: "string", required: true, description: "Code to execute" },
           language: { type: "string", required: false, description: "js or python (default: js)" }
         },
-        examples: ["hitung 2^32", "buat fungsi fibonacci", "jalankan kode ini: ..."]
+        examples: ["hitung 2^32", "buat fungsi fibonacci"]
       },
       http_request: {
         name: "http_request",
@@ -43,7 +42,7 @@ class SkillRegistry {
           headers: { type: "object", required: false },
           body: { type: "object", required: false }
         },
-        examples: ["panggil API cuaca", "kirim data ke webhook", "ambil data dari URL ini"]
+        examples: ["panggil API cuaca", "ambil data dari URL ini"]
       },
       text_transform: {
         name: "text_transform",
@@ -55,7 +54,7 @@ class SkillRegistry {
           action: { type: "string", required: true, description: "translate|summarize|extract|reformat|convert" },
           options: { type: "object", required: false }
         },
-        examples: ["terjemahkan ke Inggris", "ringkas artikel ini", "ekstrak email dari teks"]
+        examples: ["terjemahkan ke Inggris", "ringkas artikel ini"]
       },
       reminder: {
         name: "reminder",
@@ -66,7 +65,7 @@ class SkillRegistry {
           message: { type: "string", required: true },
           delay_minutes: { type: "number", required: true }
         },
-        examples: ["ingatkan saya 10 menit lagi", "set reminder besok pagi"]
+        examples: ["ingatkan saya 10 menit lagi"]
       },
       image_generate: {
         name: "image_generate",
@@ -77,51 +76,59 @@ class SkillRegistry {
           prompt: { type: "string", required: true },
           style: { type: "string", required: false }
         },
-        examples: ["buat gambar kucing astronaut", "generate ilustrasi pantai sunset"]
+        examples: ["buat gambar kucing astronaut"]
       }
     };
   }
 
-  // ── Load skills dari GitHub ────────────────────────────────────────────
+  // ── Ambil data skills, selalu return object valid (tidak pernah null) ──
   async loadSkills(userId) {
     try {
       const data = await this.memory.loadFile(`skills/${userId}_skills.json`);
-      if (data && data.custom) {
-        for (const [name, skill] of Object.entries(data.custom)) {
-          this.skills.set(name, { ...skill, builtin: false });
-        }
+      // Pastikan selalu punya struktur yang benar meski file null/kosong
+      const result = {
+        custom: {},
+        disabled: [],
+        ...(data || {})
+      };
+      // Load custom skills ke Map
+      for (const [name, skill] of Object.entries(result.custom)) {
+        this.skills.set(name, { ...skill, builtin: false });
       }
-      return data;
+      return result;
     } catch (e) {
+      // File belum ada atau error — return default kosong
       return { custom: {}, disabled: [] };
     }
   }
 
-  // ── Simpan skills ke GitHub ───────────────────────────────────────────
   async saveSkills(userId, skillsData) {
-    await this.memory.saveFile(`skills/${userId}_skills.json`, skillsData);
+    // Bersihkan _sha sebelum simpan
+    const clean = { ...skillsData };
+    delete clean._sha;
+    await this.memory.saveFile(`skills/${userId}_skills.json`, clean);
   }
 
   // ── Tambah custom skill ───────────────────────────────────────────────
   async addSkill(userId, skillDef) {
-    const data = await this.loadSkills(userId);
-    if (!data.custom) data.custom = {};
-    if (!data.disabled) data.disabled = [];
-
-    // Validate skill structure
     if (!skillDef.name || !skillDef.description) {
       throw new Error("Skill harus punya 'name' dan 'description'");
     }
 
+    const data = await this.loadSkills(userId);
+    // Pastikan custom dan disabled selalu ada
+    if (!data.custom)   data.custom   = {};
+    if (!data.disabled) data.disabled = [];
+
     data.custom[skillDef.name] = {
-      name: skillDef.name,
+      name:        skillDef.name,
       description: skillDef.description,
-      category: skillDef.category || "custom",
-      parameters: skillDef.parameters || {},
+      category:    skillDef.category    || "custom",
+      parameters:  skillDef.parameters  || {},
       instruction: skillDef.instruction || "",
-      webhook_url: skillDef.webhook_url || null,
-      examples: skillDef.examples || [],
-      createdAt: new Date().toISOString()
+      webhook_url: skillDef.webhook_url  || null,
+      examples:    skillDef.examples    || [],
+      createdAt:   new Date().toISOString()
     };
 
     await this.saveSkills(userId, data);
@@ -129,7 +136,6 @@ class SkillRegistry {
     return data.custom[skillDef.name];
   }
 
-  // ── Hapus skill ────────────────────────────────────────────────────────
   async removeSkill(userId, skillName) {
     const data = await this.loadSkills(userId);
     if (data.custom && data.custom[skillName]) {
@@ -141,7 +147,6 @@ class SkillRegistry {
     return false;
   }
 
-  // ── Disable/enable skill ──────────────────────────────────────────────
   async toggleSkill(userId, skillName, enabled) {
     const data = await this.loadSkills(userId);
     if (!data.disabled) data.disabled = [];
@@ -154,19 +159,16 @@ class SkillRegistry {
     return true;
   }
 
-  // ── Ambil semua skill aktif (builtin + custom) ────────────────────────
   async getActiveSkills(userId) {
     const data = await this.loadSkills(userId);
-    const disabled = data?.disabled || [];
-    const custom = data?.custom || {};
-
-    const all = { ...this.builtinSkills, ...custom };
+    const disabled = data.disabled || [];
+    const custom   = data.custom   || {};
+    const all      = { ...this.builtinSkills, ...custom };
     return Object.fromEntries(
       Object.entries(all).filter(([name]) => !disabled.includes(name))
     );
   }
 
-  // ── Format skill list untuk LLM system prompt ──────────────────────────
   async buildSkillsPrompt(userId) {
     const active = await this.getActiveSkills(userId);
     const lines = Object.values(active).map(s => {
@@ -178,13 +180,11 @@ class SkillRegistry {
     return lines.join("\n");
   }
 
-  // ── List semua skill untuk display ────────────────────────────────────
   async listSkills(userId) {
-    const data = await this.loadSkills(userId);
-    const disabled = data?.disabled || [];
-    const custom = data?.custom || {};
-    const all = { ...this.builtinSkills, ...custom };
-
+    const data     = await this.loadSkills(userId);
+    const disabled = data.disabled || [];
+    const custom   = data.custom   || {};
+    const all      = { ...this.builtinSkills, ...custom };
     return Object.values(all).map(s => ({
       ...s,
       active: !disabled.includes(s.name)
