@@ -213,8 +213,13 @@
         "role": "assistant",
         "content": "Bisa, tetapi ini sangat sensitif karena private key akan saya tampilkan di chat.\n\nKonfirmasi final dulu:\n1. Buat 1 wallet EVM untuk dipakai multichain (alamat yang sama untuk Ethereum / BNB Chain / Polygon / Base / Arbitrum, dll)\n2. Tampilkan langsung:\n   - Public address\n   - Private key\n3. Saya lanjut hanya jika kamu benar-benar siap menyimpan private key itu secara aman.\n\nBalas: YA, TAMPILKAN WALLET",
         "timestamp": "2026-03-23T11:02:02.332Z"
+      },
+      {
+        "role": "user",
+        "content": "YA, TAMPILKAN WALLET",
+        "timestamp": "2026-03-23T11:02:23.512Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:02:03.615Z"
+  "updatedAt": "2026-03-23T11:02:23.644Z"
 }
