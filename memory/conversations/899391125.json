@@ -158,8 +158,13 @@
         "role": "user",
         "content": "Create wallet",
         "timestamp": "2026-03-23T11:00:05.070Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Tentu. Untuk *create wallet*, saya perlu tahu dulu jaringan yang kamu maksud:\n\n- *Crypto wallet* (mis. Bitcoin / Ethereum / Solana)\n- *E-wallet* / dompet digital\n- *Wallet app* untuk aplikasi tertentu\n\nKalau maksudmu *crypto wallet*, saya bisa bantu dua cara:\n\n1. *Panduan membuat wallet* di aplikasi populer  \n   Contoh: MetaMask, Trust Wallet, Phantom\n\n2. *Generate wallet secara teknis*  \n   Mis. buat address + private key / seed phrase via kode\n\nKalau mau cepat, balas saja salah satu:\n\n- `Ethereum wallet`\n- `Bitcoin wallet`\n- `Solana wallet`\n- `MetaMask`\n- `Trust Wallet`\n\n*Catatan penting:* jangan pernah bagikan *seed phrase* atau *private key* ke siapa pun, termasuk ke saya.",
+        "timestamp": "2026-03-23T11:00:05.070Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:00:05.283Z"
+  "updatedAt": "2026-03-23T11:00:06.121Z"
 }
