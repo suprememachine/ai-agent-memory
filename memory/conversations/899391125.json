@@ -1,27 +1,5 @@
 {
   "sessions": {
-    "tg_1774237766884": [
-      {
-        "role": "user",
-        "content": "Skilld",
-        "timestamp": "2026-03-23T03:49:31.836Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Maksud Anda apa dengan \"Skilld\"? Jika Anda ingin memakai skill tertentu, sebutkan saja, misalnya: mineloot_status, web_search, atau lainnya.",
-        "timestamp": "2026-03-23T03:49:31.836Z"
-      },
-      {
-        "role": "user",
-        "content": "Skill",
-        "timestamp": "2026-03-23T03:49:41.688Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Skill yang tersedia saat ini: web_search, code_runner, http_request, text_transform, reminder, image_generate, mineloot_status, cek_wallet_opensea.",
-        "timestamp": "2026-03-23T03:49:41.688Z"
-      }
-    ],
     "tg_1774237846926": [
       {
         "role": "user",
@@ -189,7 +167,14 @@
         "content": "Siap. Requirement yang aku tangkap:\n\n1. Chain:\n- EVM\n- Solana\n\n2. Create wallet:\n- Private key\n- Seed phrase\n\n3. Import/Export wallet:\n- Private key\n- Seed phrase\n\n4. Interface:\n- Bot\n\n5. Bahasa:\n- Python\n\nBerarti scope bot Python-nya:\n- Buat wallet EVM\n- Buat wallet Solana\n- Import wallet via private key\n- Import wallet via seed phrase\n- Export/tampilkan private key\n- Export/tampilkan seed phrase\n- Format bot-based flow\n\nKalau setuju, langkah berikutnya aku bisa bantu bikin:\n- struktur fitur bot\n- arsitektur project Python\n- pilihan library untuk EVM & Solana\n- contoh source code awal bot\n\nKalau mau, aku lanjut buatkan skeleton project Python bot wallet-nya.",
         "timestamp": "2026-03-23T10:58:08.381Z"
       }
+    ],
+    "tg_1774263489369": [
+      {
+        "role": "user",
+        "content": "1.Evm dan solana\n2.Private dan phrase\n3.Private dan phrase \n4.Bot\n5.Python",
+        "timestamp": "2026-03-23T10:58:16.262Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T10:58:09.604Z"
+  "updatedAt": "2026-03-23T10:58:16.503Z"
 }
