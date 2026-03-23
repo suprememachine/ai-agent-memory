@@ -1,17 +1,5 @@
 {
   "sessions": {
-    "tg_1774267000033": [
-      {
-        "role": "user",
-        "content": "Halo kania",
-        "timestamp": "2026-03-23T11:56:43.238Z"
-      },
-      {
-        "role": "assistant",
-        "content": "Halo juga! Ada yang bisa aku bantu?",
-        "timestamp": "2026-03-23T11:56:43.238Z"
-      }
-    ],
     "tg_1774267044665": [
       {
         "role": "user",
@@ -139,7 +127,14 @@
         "content": "Siap, CEO GIOK.\n\nBerikut format output untuk hasil wallet yang sudah dibuat pada opsi 2:\n\n{\n  \"status\": \"success\",\n  \"wallet\": {\n    \"wallet_id\": \"wallet_20260320_002\",\n    \"chain\": \"evm\",\n    \"address\": \"0xabcd....1234\",\n    \"private_key\": \"0xPRIVATE_KEY_DI_SINI\"\n  }\n}\n\nKalau CEO GIOK mau, saya juga bisa sekalian buatkan:\n- format JSON lengkap,\n- format yang siap di-copy ke file .txt/.json,\n- atau output multi-wallet untuk beberapa address sekaligus.",
         "timestamp": "2026-03-23T13:16:46.793Z"
       }
+    ],
+    "tg_1774303041888": [
+      {
+        "role": "user",
+        "content": "Skill",
+        "timestamp": "2026-03-23T21:57:29.437Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T13:16:49.108Z"
+  "updatedAt": "2026-03-23T21:57:29.793Z"
 }
