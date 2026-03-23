@@ -133,8 +133,13 @@
         "role": "user",
         "content": "Ya buatkan saja",
         "timestamp": "2026-03-23T11:48:14.358Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Siap. Berikut cara paling cepat membuat wallet EVM secara lokal.\n\nNode.js (ethers v6):\nconst { Wallet } = require(\"ethers\");\n\nconst wallet = Wallet.createRandom();\nconsole.log(\"Address:\", wallet.address);\nconsole.log(\"Private Key:\", wallet.privateKey);\nconsole.log(\"Mnemonic:\", wallet.mnemonic.phrase);\n\nLangkah pakai:\n1. Buat folder baru\n2. Jalankan:\n   npm init -y\n   npm install ethers\n3. Simpan kode di file misalnya create-wallet.js\n4. Jalankan:\n   node create-wallet.js\n\nVersi yang simpan ke file .json lokal:\nconst { Wallet } = require(\"ethers\");\nconst fs = require(\"fs\");\n\nconst wallet = Wallet.createRandom();\n\nconst data = {\n  address: wallet.address,\n  privateKey: wallet.privateKey,\n  mnemonic: wallet.mnemonic.phrase\n};\n\nfs.writeFileSync(\"wallet.json\", JSON.stringify(data, null, 2));\nconsole.log(\"Wallet disimpan ke wallet.json\");\n\nKalau mau, saya juga bisa buatkan versi yang:\n- output hanya address saja\n- generate banyak wallet sekaligus\n- format CSV/JSON\n- versi Python",
+        "timestamp": "2026-03-23T11:48:14.358Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:48:14.720Z"
+  "updatedAt": "2026-03-23T11:48:15.622Z"
 }
