@@ -65,7 +65,14 @@
         "content": "Tentu. Saya bisa pakai code_runner. Kirim kode yang ingin dijalankan, dan kalau perlu sebutkan bahasanya (js atau python).",
         "timestamp": "2026-03-23T01:22:37.652Z"
       }
+    ],
+    "tg_1774228998914": [
+      {
+        "role": "user",
+        "content": "Cek didatabase apakah ada opensea monitor",
+        "timestamp": "2026-03-23T01:23:25.101Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T01:22:38.613Z"
+  "updatedAt": "2026-03-23T01:23:25.285Z"
 }
