@@ -157,7 +157,14 @@
         "content": "Bisa, tapi aku perlu 2 hal dulu:\n1. Alamat wallet / user yang mau dicek posisinya\n2. Link resmi MineLoot atau endpoint API/kontraknya kalau ada\n\nKalau kamu mau, aku juga bisa coba cari sumber publik MineLoot dulu. Kirim saja salah satu dari ini:\n- alamat wallet user\n- URL app/website MineLoot\n- contract address / API endpoint",
         "timestamp": "2026-03-23T01:46:19.701Z"
       }
+    ],
+    "tg_1774230452553": [
+      {
+        "role": "user",
+        "content": "llm",
+        "timestamp": "2026-03-23T01:47:36.758Z"
+      }
     ]
   },
-  "updatedAt": "2026-03-23T01:46:20.815Z"
+  "updatedAt": "2026-03-23T01:47:36.891Z"
 }
