@@ -138,8 +138,13 @@
         "role": "user",
         "content": "Halo kania",
         "timestamp": "2026-03-23T11:56:43.238Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Halo juga! Ada yang bisa aku bantu?",
+        "timestamp": "2026-03-23T11:56:43.238Z"
       }
     ]
   },
-  "updatedAt": "2026-03-23T11:56:43.369Z"
+  "updatedAt": "2026-03-23T11:56:44.052Z"
 }
