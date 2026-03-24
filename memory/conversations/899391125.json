@@ -153,8 +153,13 @@
         "role": "assistant",
         "content": "Siap, cek apa?\nKalau maksudnya wallet OpenSea yang sebelumnya, kirim saja:\n- alamat wallet `0x...`\n\nKalau mau, saya bisa bantu cek:\n- aktivitas mint\n- sale/listing\n- ringkasan aktivitas terbaru",
         "timestamp": "2026-03-24T00:19:07.185Z"
+      },
+      {
+        "role": "user",
+        "content": "Skill",
+        "timestamp": "2026-03-24T00:19:22.685Z"
       }
     ]
   },
-  "updatedAt": "2026-03-24T00:19:07.987Z"
+  "updatedAt": "2026-03-24T00:19:23.044Z"
 }
